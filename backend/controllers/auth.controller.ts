@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import prisma from "../prisma/prisma";
 import { generateAndSetCookie } from "../utils/generateCookie";
 
-export const SignUp = async (req: Request, res: Response) => {
+export const signUp = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body as {
       username: string;
@@ -45,13 +45,54 @@ export const SignUp = async (req: Request, res: Response) => {
 
     if (newAdmin) {
       generateAndSetCookie(res, newAdmin.username);
-      res.status(200).json({ success: "true", user: newAdmin.username });
+      res.status(200).json({
+        success: "true",
+        message: "User registered successfully",
+        user: newAdmin.username,
+      });
       return;
     }
 
     res.status(400).json({ success: "false", error: "Failed to create user" });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ success: "false", error: "Internal server error" });
+  }
+};
+
+export const signIn = async (req: Request, res: Response) => {
+  try {
+    const { username, password } = req.body as {
+      username: string;
+      password: string;
+    };
+
+    if (!username || !password) {
+      res.status(400).json({
+        success: "false",
+        error: "Both username and password are required",
+      });
+      return;
+    }
+
+    const user = await prisma.admin.findUnique({ where: { username } });
+    if (!user) {
+      res.status(400).json({ success: "false", error: "Invalid user data" });
+      return;
+    }
+
+    const validPassword = bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      res.status(400).json({ success: "false", error: "Invalid user data" });
+      return;
+    }
+
+    generateAndSetCookie(res, username);
+    res.status(200).json({
+      success: "true",
+      message: "User logged in successfully",
+      user: user.username,
+    });
+  } catch (error) {
     res.status(500).json({ success: "false", error: "Internal server error" });
   }
 };
