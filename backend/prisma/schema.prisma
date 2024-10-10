@@ -18,3 +18,62 @@ model Admin {
   username String @unique
   password String
 }
+
+model Product {
+  id               Int      @id @default(autoincrement())
+  title            String   @unique
+  smallDescription String
+  fullDescription  String
+  material         String
+  images           String[]
+  color            Color[]
+  sizes            Size[]
+  genders          Gender[]
+  category         Category
+  regularPrice     Float
+  discountPrice    Float?
+  totalOrders      Int      @default(0)
+  reviews          Reviev[]
+}
+
+model Reviev {
+  id        Int      @id @default(autoincrement())
+  username  String
+  rating    Int
+  text      String
+  createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+}
+
+enum Color {
+  RED
+  BLUE
+  ORANGE
+  BLACK
+  GREEN
+  YELLOW
+}
+
+enum Size {
+  XS
+  S
+  M
+  L
+  XL
+}
+
+enum Gender {
+  MEN
+  WOMEN
+  KIDS
+}
+
+enum Category {
+  TSHIRT
+  SWEATSHIRTS
+  JACKETS
+  BOTTOMS
+  FOOTWEAR
+  ACCESSORIES
+}
