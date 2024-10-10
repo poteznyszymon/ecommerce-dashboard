@@ -96,3 +96,14 @@ export const signIn = async (req: Request, res: Response) => {
     res.status(500).json({ success: "false", error: "Internal server error" });
   }
 };
+
+export const logout = async (req: Request, res: Response) => {
+  try {
+    res.clearCookie("JWT_TOKEN");
+    res
+      .status(200)
+      .json({ success: "true", message: "User logged-out successfully" });
+  } catch (error) {
+    res.status(500).json({ success: "false", error: "Internal server error" });
+  }
+};
