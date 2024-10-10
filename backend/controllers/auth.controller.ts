@@ -97,7 +97,7 @@ export const signIn = async (req: Request, res: Response) => {
   }
 };
 
-export const logout = async (req: Request, res: Response) => {
+export const logout = async (_req: Request, res: Response) => {
   try {
     res.clearCookie("JWT_TOKEN");
     res
