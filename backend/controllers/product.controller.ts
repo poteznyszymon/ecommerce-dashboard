@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { isProductRequired } from "../utils/checkRequired";
 import prisma from "../prisma/prisma";
 import { v2 } from "cloudinary";
 import { ProductType } from "../types/product";
@@ -20,7 +19,17 @@ export const addProduct = async (req: Request, res: Response) => {
       discountPrice,
     } = req.body as ProductType;
 
-    if (!title || !shortDescription || !fullDescription) {
+    if (
+      !title ||
+      !shortDescription ||
+      !fullDescription ||
+      !material ||
+      !sizes ||
+      !gender ||
+      !category ||
+      !regularPrice ||
+      !discountPrice
+    ) {
       res.status(400).json({
         success: "false",
         error: "Some required fields are missing",
@@ -74,6 +83,24 @@ export const getAllProducts = async (_req: Request, res: Response) => {
     res.status(200).json({ success: "true", products: allPosts });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: "false", error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const deletedProduct = await prisma.product.delete({
+      where: { id: Number(id) },
+    });
+
+    res.status(200).json({
+      success: "true",
+      message: "Product deleted successfully",
+      deletedProduct: deletedProduct,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
   }
 };
