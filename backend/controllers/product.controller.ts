@@ -27,8 +27,7 @@ export const addProduct = async (req: Request, res: Response) => {
       !sizes ||
       !gender ||
       !category ||
-      !regularPrice ||
-      !discountPrice
+      !regularPrice
     ) {
       res.status(400).json({
         success: "false",
