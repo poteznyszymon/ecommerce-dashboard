@@ -37,7 +37,7 @@ const LoginForm = () => {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel htmlFor="username">Username</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Input
@@ -60,7 +60,7 @@ const LoginForm = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel htmlFor="password">Password</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Input

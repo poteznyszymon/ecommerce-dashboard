@@ -107,3 +107,23 @@ export const logout = async (_req: Request, res: Response) => {
     res.status(500).json({ success: "false", error: "Internal server error" });
   }
 };
+
+export const getMe = async (req: Request, res: Response) => {
+  try {
+    const currentUserId = req.user?.id;
+    const currentUser = await prisma.admin.findUnique({
+      where: { id: currentUserId },
+      select: { id: true, username: true },
+    });
+    if (!currentUser) {
+      res.status(404).json({ success: "false", error: "User not found" });
+    }
+    res.status(200).json({
+      success: "true",
+      message: "User found successfully",
+      user: currentUser,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
