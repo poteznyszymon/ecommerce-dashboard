@@ -5,8 +5,10 @@ import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.route";
 import productRoutes from "./routes/product.route";
+import usersRoutes from "./routes/user.route";
 
 dotenv.config();
+
 v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -22,6 +24,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/product", productRoutes);
+app.use("/api/users", usersRoutes);
 
 app.listen(PORT, () => {
   console.log(`server running on port: ${PORT}`);

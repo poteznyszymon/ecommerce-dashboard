@@ -81,6 +81,6 @@ model Review {
   rating    Int
   text      String
   createdAt DateTime @default(now())
-  product   Product  @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int
 }

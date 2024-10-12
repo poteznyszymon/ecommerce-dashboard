@@ -89,9 +89,29 @@ export const getAllProducts = async (_req: Request, res: Response) => {
 export const deleteProduct = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    const productId = Number(id);
+
+    const usersWithProductInWishlist = await prisma.user.findMany({
+      where: {
+        wishList: {
+          some: { id: productId },
+        },
+      },
+    });
+
+    for (const user of usersWithProductInWishlist) {
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          wishList: {
+            disconnect: { id: productId },
+          },
+        },
+      });
+    }
 
     const deletedProduct = await prisma.product.delete({
-      where: { id: Number(id) },
+      where: { id: productId },
     });
 
     res.status(200).json({
@@ -100,6 +120,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
       deletedProduct: deletedProduct,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
