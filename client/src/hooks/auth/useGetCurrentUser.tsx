@@ -1,15 +1,23 @@
-import { useMutation } from "@tanstack/react-query";
+import { Admin } from "@/lib/types";
+import { useQuery } from "@tanstack/react-query";
 
-const useGetCurrentUser = () => {
-  const {
-    mutate: getCurrentUser,
-    data: currentUser,
-    isPending,
-  } = useMutation({
-    mutationFn: async () => {},
+const useAuthUser = () => {
+  const { data, isLoading, isError } = useQuery<Admin>({
+    queryKey: ["authUser"],
+    queryFn: async () => {
+      try {
+        const res = await fetch("/api/auth/get-me");
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error);
+        return data.user || null;
+      } catch (error) {
+        console.log("Error fetching user:", error);
+        return null;
+      }
+    },
   });
 
-  return { getCurrentUser, currentUser, isPending };
+  return { data, isLoading, isError };
 };
 
-export default useGetCurrentUser;
+export default useAuthUser;

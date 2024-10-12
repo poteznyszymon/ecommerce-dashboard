@@ -1,12 +1,12 @@
 import SquareBackground from "@/components/shared/SquareBackground";
+import useGetCurrentUser from "@/hooks/auth/useGetCurrentUser";
 import { Loader2 } from "lucide-react";
 import { Navigate, Outlet } from "react-router-dom";
 
 const PublicRoutes = () => {
-  const user = null;
-  const loading = false;
+  const { isLoading, data: user } = useGetCurrentUser();
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="h-screen flex justify-center items-center">
         <SquareBackground />
@@ -14,6 +14,7 @@ const PublicRoutes = () => {
       </div>
     );
   }
+
   if (user) {
     return <Navigate to="/" />;
   }

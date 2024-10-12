@@ -5,15 +5,21 @@ import HomePage from "@/pages/root/home/HomePage";
 import RootLayout from "@/pages/root/RootLayout";
 import { createBrowserRouter } from "react-router-dom";
 import PublicRoutes from "./PublicRoutes";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: <PrivateRoutes />,
     children: [
       {
-        index: true,
-        element: <HomePage />,
+        element: <RootLayout />,
+        children: [
+          {
+            index: true,
+            element: <HomePage />,
+          },
+        ],
       },
     ],
   },

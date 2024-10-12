@@ -25,7 +25,7 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = (values: authValues) => {
+  const onSubmit = (values: authValues): void => {
     console.log(values);
   };
 
