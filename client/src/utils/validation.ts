@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const loginSchema = z.object({
+export const authSchema = z.object({
   username: z.string().trim().min(1, { message: "Username cannot be empty" }),
   password: z
     .string()
@@ -8,4 +8,4 @@ export const loginSchema = z.object({
     .min(6, { message: "Password must be at lest 6 characters long" }),
 });
 
-export type loginValues = z.infer<typeof loginSchema>;
+export type authValues = z.infer<typeof authSchema>;

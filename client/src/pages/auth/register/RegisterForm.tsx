@@ -14,7 +14,7 @@ import LoadingButton from "@/components/shared/LoadingButton";
 import { Eye, EyeOff, Lock, User } from "lucide-react";
 import { useState } from "react";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<authValues>({
@@ -64,7 +64,7 @@ const LoginForm = () => {
               <FormControl>
                 <div className="relative">
                   <Input
-                    placeholder="password"
+                    placeholder="Create strong password"
                     {...field}
                     className="pl-8 pr-8"
                     id="password"
@@ -91,11 +91,11 @@ const LoginForm = () => {
           )}
         />
         <LoadingButton loading={false} className="w-full">
-          Sign In
+          Sign Up
         </LoadingButton>
       </form>
     </Form>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
