@@ -13,9 +13,12 @@ import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/shared/LoadingButton";
 import { Eye, EyeOff, Lock, User } from "lucide-react";
 import { useState } from "react";
+import useLoginUser from "@/hooks/auth/useLoginUser";
+import { Navigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { loginUser, isPending } = useLoginUser();
 
   const form = useForm<authValues>({
     resolver: zodResolver(authSchema),
@@ -26,7 +29,16 @@ const LoginForm = () => {
   });
 
   const onSubmit = (values: authValues): void => {
-    console.log(values);
+    loginUser(values);
+    form.reset({
+      password: "",
+      username: "",
+    });
+    navigateToHome();
+  };
+
+  const navigateToHome = () => {
+    return <Navigate to={"/"} />;
   };
 
   return (
@@ -68,12 +80,12 @@ const LoginForm = () => {
                     {...field}
                     className="pl-8 pr-8"
                     id="password"
-                    type={showPassword ? "password" : "text"}
+                    type={!showPassword ? "password" : "text"}
                   />
                   <label htmlFor="password">
                     <Lock className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground size-4 cursor-text" />
                   </label>
-                  {showPassword ? (
+                  {!showPassword ? (
                     <Eye
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute cursor-pointer right-2 top-1/2 -translate-y-1/2 text-muted-foreground size-5"
@@ -90,7 +102,7 @@ const LoginForm = () => {
             </FormItem>
           )}
         />
-        <LoadingButton loading={false} className="w-full">
+        <LoadingButton loading={isPending} className="w-full">
           Sign In
         </LoadingButton>
       </form>

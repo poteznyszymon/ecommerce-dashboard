@@ -80,7 +80,7 @@ export const signIn = async (req: Request, res: Response) => {
       return;
     }
 
-    const validPassword = bcrypt.compare(password, user.password);
+    const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
       res.status(400).json({ success: "false", error: "Invalid user data" });
       return;

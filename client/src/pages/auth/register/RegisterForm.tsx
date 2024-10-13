@@ -68,12 +68,12 @@ const RegisterForm = () => {
                     {...field}
                     className="pl-8 pr-8"
                     id="password"
-                    type={showPassword ? "password" : "text"}
+                    type={!showPassword ? "password" : "text"}
                   />
                   <label htmlFor="password">
                     <Lock className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground size-4 cursor-text" />
                   </label>
-                  {showPassword ? (
+                  {!showPassword ? (
                     <Eye
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute cursor-pointer right-2 top-1/2 -translate-y-1/2 text-muted-foreground size-5"
