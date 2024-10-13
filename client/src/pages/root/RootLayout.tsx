@@ -1,4 +1,5 @@
 import MenuBar from "@/components/root-layout/MenuBar";
+import MobileMenuBar from "@/components/root-layout/MobileMenuBar";
 import Navbar from "@/components/root-layout/Navbar";
 import SquareBackground from "@/components/shared/SquareBackground";
 import { Toaster } from "@/components/ui/toaster";
@@ -14,6 +15,7 @@ const RootLayout = () => {
       </div>
       <Toaster />
       <SquareBackground />
+      <MobileMenuBar />
     </main>
   );
 };
