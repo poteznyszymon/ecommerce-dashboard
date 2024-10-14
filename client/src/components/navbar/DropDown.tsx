@@ -18,7 +18,7 @@ const DropDown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Button variant={"ghost"}>
+        <Button variant={"ghost"} asChild>
           <div className="flex items-center gap-3">
             <p className="text-md">{data?.username}</p>
             <ChevronDown className="size-4" />

@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="max-w-7xl w-full mx-auto flex justify-between items-center h-full p-5 2xl:p-0">
         <Link to={"/"}>
           <div className="flex flex-col">
-            <h1 className="text-xl font-bold">E-commerce</h1>
+            <h1 className="text-lg lg:text-xl font-bold">E-commerce</h1>
             <p className="text-muted-foreground text-sm">admin panel</p>
           </div>
         </Link>

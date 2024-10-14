@@ -29,6 +29,7 @@ const MobileMenuBar = () => {
       >
         {navLinks.map((item) => (
           <Link
+            key={item.name}
             to={item.link}
             className="w-full"
             onClick={() => setShowMenuBar(false)}
