@@ -1,34 +1,37 @@
 import InfoTile from "@/components/dashboard/InfoTile";
-import { CreditCard, DollarSign, ShoppingCart, Users } from "lucide-react";
+import InfoTilesSkeleton from "@/components/skeletons/InfoTilesSkeleton";
+import useGetOrdersInfo from "@/hooks/orders/useGetOrdersInfo";
+import { Calendar, CreditCard, DollarSign, ShoppingCart } from "lucide-react";
 
 const DashboardPage = () => {
+  const { data, isLoading } = useGetOrdersInfo();
   const infoData = [
     {
-      title: "Total revenue",
+      title: "Total Revenue",
       icon: DollarSign,
-      data: "45,231.89",
-      procentChange: 20.1,
+      data: data?.totalRevenue,
+      procentChange: 0,
       dollarPrefix: true,
     },
     {
       title: "Total Orders",
       icon: ShoppingCart,
-      data: "1,205",
-      procentChange: 12.5,
+      data: data?.totalOrders,
+      procentChange: 0,
       dollarPrefix: false,
     },
     {
-      title: "New Customers",
-      icon: Users,
-      data: "356",
-      procentChange: 18.7,
+      title: "Orders Today",
+      icon: Calendar,
+      data: data?.ordersToday,
+      procentChange: 0,
       dollarPrefix: false,
     },
     {
       title: "Average Order Value",
       icon: CreditCard,
-      data: "37.54",
-      procentChange: 5.2,
+      data: data?.averageOrderValue,
+      procentChange: 0,
       dollarPrefix: true,
     },
   ];
@@ -36,16 +39,18 @@ const DashboardPage = () => {
   return (
     <div className="min-h-screen w-full z-10 p-5">
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        {infoData.map((item, idx) => (
-          <InfoTile
-            key={idx}
-            title={item.title}
-            icon={item.icon}
-            data={item.data}
-            procentChange={item.procentChange}
-            dollarPrefix={item.dollarPrefix}
-          />
-        ))}
+        {isLoading && <InfoTilesSkeleton numberOfTiles={infoData.length} />}
+        {!isLoading &&
+          infoData.map((item, idx) => (
+            <InfoTile
+              key={idx}
+              title={item.title}
+              icon={item.icon}
+              data={item.data ? item.data : 0}
+              procentChange={item.procentChange}
+              dollarPrefix={item.dollarPrefix}
+            />
+          ))}
       </div>
     </div>
   );

@@ -84,7 +84,7 @@ const productsData = [
 const ProductsPage = () => {
   return (
     <div className="min-h-screen p-5 w-full z-10">
-      <div className=" bg-background rounded-md p-5">
+      <div className="p-5 bg-background border">
         <Table>
           <TableHeader>
             <TableRow>

@@ -27,13 +27,14 @@ export const getOrdersInfo = async (req: Request, res: Response) => {
     });
 
     res.status(200).json({
-      success: "true",
+      ok: true,
       totalOrders: totalOrders,
       ordersToday: ordersToday,
       averageOrderValue: averageOrderValue,
       totalRevenue: totalRevenue,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Internal server error" });
   }
 };

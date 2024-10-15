@@ -70,3 +70,12 @@ export interface Review {
   product: Product;
   productId: number;
 }
+
+/// more types to help
+
+export interface ordersDashboardInfo {
+  totalOrders: number;
+  ordersToday: number;
+  averageOrderValue: number;
+  totalRevenue: number;
+}
