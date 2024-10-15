@@ -76,10 +76,26 @@ export const addProduct = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllProducts = async (_req: Request, res: Response) => {
+export const getAllProducts = async (req: Request, res: Response) => {
+  const pageSize = 6;
   try {
-    const allPosts = await prisma.product.findMany();
-    res.status(200).json({ success: "true", products: allPosts });
+    const page = parseInt(req.query.page as string) || 1;
+
+    const totalProducts = await prisma.product.count();
+    const totalPages = Math.ceil(totalProducts / pageSize);
+    const hasNextPage = page < totalPages;
+
+    const allProducts = await prisma.product.findMany({
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    });
+    res.status(200).json({
+      ok: true,
+      currentPage: page,
+      totalPages: totalPages,
+      hasNextPage: hasNextPage,
+      products: allProducts,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });

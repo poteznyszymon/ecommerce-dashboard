@@ -79,6 +79,20 @@ const productsData = [
     regularPrice: 59.99,
     discountPrice: 44.99,
   },
+  {
+    id: 6,
+    title: "Cozy Knit Sweater",
+    shortDescription: "Warm winter sweater",
+    fullDescription:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat a risus a eleifend. Aenean non facilisis leo, lobortis fermentum justo. Ut nec enim sollicitudin, interdum leo vitae, suscipit est.",
+
+    material: "Wool Blend",
+    color: "Gray",
+    sizes: ["S", "M", "L", "XL"],
+    gender: "Unisex",
+    regularPrice: 59.99,
+    discountPrice: 44.99,
+  },
 ];
 
 const ProductsPage = () => {
