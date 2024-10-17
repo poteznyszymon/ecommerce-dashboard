@@ -10,7 +10,7 @@ const MenuBar = () => {
   return (
     <div
       className={`hidden md:flex bg-background border-r z-10 sticky top-[5rem] items-end flex-col transition-all duration-300 h-[calc(100vh-5rem)] p-5 ${
-        collapsedMenu ? "w-24" : "w-72"
+        collapsedMenu ? "w-24" : "w-60"
       }`}
     >
       <Button

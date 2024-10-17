@@ -16,7 +16,7 @@ const InfoTile = ({
   dollarPrefix,
 }: InfoTileProps) => {
   return (
-    <div className="bg-background border h-40 shadow-sm flex flex-col justify-between p-5">
+    <div className="bg-background border h-40 shadow-sm flex flex-col justify-between p-5 rounded-md">
       <div className="flex justify-between">
         <p className="text-sm">{title}</p>
         <Icon className="size-4 text-muted-foreground" />

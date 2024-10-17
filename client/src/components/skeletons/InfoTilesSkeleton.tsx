@@ -10,7 +10,7 @@ const InfoTilesSkeleton = ({ numberOfTiles }: InfoTilesSkeleton) => {
       {listToIterateOver.map((_, idx) => (
         <div
           key={idx}
-          className="bg-background h-40 border shadow-sm p-5 flex flex-col justify-between animate-pulse"
+          className="bg-background h-40 border rounded-md shadow-sm p-5 flex flex-col justify-between animate-pulse"
         >
           <div className="flex justify-between">
             <div className="w-24 h-4 bg-secondary" />
