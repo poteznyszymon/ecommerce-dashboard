@@ -23,7 +23,7 @@ const ProductSelectors = ({
   handleChange,
 }: ProductSelectorsProps) => {
   return (
-    <div className="flex flex-col justify-center gap-10 h-full">
+    <div className="flex flex-col justify-center gap-5 xl:gap-10 h-full">
       <div className="flex flex-col gap-1">
         <Label htmlFor="category">Category</Label>
         <Select

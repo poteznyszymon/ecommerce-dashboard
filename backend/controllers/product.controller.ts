@@ -36,7 +36,6 @@ export const addProduct = async (req: Request, res: Response) => {
       return;
     }
 
-    const colorsArray = typeof color === "string" ? JSON.parse(color) : color;
     const sizesArray = typeof sizes === "string" ? JSON.parse(sizes) : sizes;
 
     let imagesLinks: string[] = [];
@@ -56,7 +55,7 @@ export const addProduct = async (req: Request, res: Response) => {
         fullDescription,
         material,
         images: imagesLinks,
-        color: colorsArray,
+        color,
         sizes: sizesArray,
         gender,
         category,

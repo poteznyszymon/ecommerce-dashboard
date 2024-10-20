@@ -1,7 +1,13 @@
 import { addProductData } from "@/lib/types";
 import { useMutation } from "@tanstack/react-query";
+import { useToast } from "../use-toast";
 
-const useCreateNewProduct = () => {
+interface useCreateNewProductOptions {
+  onSuccess: () => void;
+}
+
+const useCreateNewProduct = ({ onSuccess }: useCreateNewProductOptions) => {
+  const { toast } = useToast();
   const { mutate: addProduct, isPending } = useMutation({
     mutationFn: async (productData: addProductData) => {
       try {
@@ -21,6 +27,20 @@ const useCreateNewProduct = () => {
         console.log(error);
         throw new Error("Something went wrong please try again.");
       }
+    },
+    onSuccess: () => {
+      toast({
+        description: "Product created successfully",
+      });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onError: () => {
+      toast({
+        description: "Something went wrong, please try again.",
+        variant: "destructive",
+      });
     },
   });
 

@@ -17,9 +17,10 @@ const ImageGrid = ({ images, onChange }: ImageGridProps) => {
           {images[idx] ? (
             <img src={images[idx]} className="w-full h-full" />
           ) : (
-            <Image className="md:size-10 sm:size-7 size-5 text-muted-foreground" />
+            <Image className="sm:size-7 size-5 text-muted-foreground" />
           )}
           <input
+            accept="image/*"
             type="file"
             hidden
             id={`image-input-${idx}`}

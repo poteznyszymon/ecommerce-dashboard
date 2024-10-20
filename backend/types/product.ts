@@ -4,7 +4,7 @@ export interface ProductType {
   fullDescription: string;
   material: string;
   images: string[];
-  color: string[];
+  color: string;
   sizes: string[];
   gender: string;
   category: string;

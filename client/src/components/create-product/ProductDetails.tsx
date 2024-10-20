@@ -63,7 +63,7 @@ const ProductDetails = ({
           required
           placeholder="Enter full description"
           id="full"
-          className="max-h-48"
+          className="max-h-48 h-[5rem]"
         />
       </div>
       <div>
