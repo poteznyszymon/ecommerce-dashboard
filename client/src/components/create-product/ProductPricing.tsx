@@ -5,7 +5,7 @@ import { Input } from "../ui/input";
 interface ProductPricingProps {
   productPricing: {
     regularPrice: string;
-    discountPrice: string | null;
+    discountPrice: string | undefined;
   };
   handleChange: (field: string, value: string) => void;
 }
@@ -17,7 +17,7 @@ const ProductPricing = ({
   const [onDiscount, setOnDiscount] = useState(false);
 
   return (
-    <div className="h-full flex flex-col gap-5">
+    <div className="h-full flex flex-col gap-4">
       <div>
         <label className="text-sm font-semibold" htmlFor="price">
           Regular Price

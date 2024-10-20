@@ -2,7 +2,9 @@ import ImageGrid from "@/components/create-product/ImageGrid";
 import ImageUpload from "@/components/create-product/ImageUpload";
 import ProductDetails from "@/components/create-product/ProductDetails";
 import ProductPricing from "@/components/create-product/ProductPricing";
+import ProductSelectors from "@/components/create-product/ProductSelectors";
 import LoadingButton from "@/components/shared/LoadingButton";
+import { addProductData } from "@/lib/types";
 import { useState } from "react";
 
 const CreateProductPage = () => {
@@ -17,7 +19,11 @@ const CreateProductPage = () => {
   });
   const [productPricing, setProductPricing] = useState({
     regularPrice: "",
-    discountPrice: null,
+    discountPrice: undefined,
+  });
+  const [productSelects, setProductSelects] = useState({
+    category: "",
+    color: "",
   });
 
   const handleImagesUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,8 +67,15 @@ const CreateProductPage = () => {
     }));
   };
 
+  const handleProductSelectsChange = (field: string, value: string) => {
+    setProductSelects((prevSelects) => ({
+      ...prevSelects,
+      [field]: value,
+    }));
+  };
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const productData = {
+    const productData: addProductData = {
       title: productDeatils.title,
       shortDescription: productDeatils.shortDescription,
       fullDescription: productDeatils.fullDescription,
@@ -72,6 +85,8 @@ const CreateProductPage = () => {
       gender: productDeatils.gender,
       regularPrice: productPricing.regularPrice,
       discountPrice: productPricing.discountPrice,
+      category: productSelects.category,
+      color: productSelects.color,
     };
     console.log(productData);
     e.preventDefault();
@@ -80,18 +95,24 @@ const CreateProductPage = () => {
   return (
     <div className="min-h-screen w-full flex flex-col p-5 z-10 gap-5">
       <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-5">
-          <div className="border bg-background p-10 flex flex-col gap-5  rounded-md">
+        <div className="grid lg:grid-cols-2 xl:grid-cols-3 xl:grid-rows-2 gap-5">
+          <div className="border bg-background p-10 flex flex-col gap-5 rounded-md xl:row-span-2">
             <ImageUpload onChange={handleImagesUpload} />
             <ImageGrid images={images} onChange={handleImageUpload} />
           </div>
-          <div className="bg-background border p-10 flex flex-col  space-y-5 rounded-md">
+          <div className="bg-background border p-10 flex flex-col space-y-5 rounded-md xl:row-span-2">
             <ProductDetails
               productDetails={productDeatils}
               handleChange={handleProductDetailsChange}
             />
           </div>
-          <div className="bg-background border p-10 flex flex-col  space-y-5 rounded-md">
+          <div className="bg-background border p-10 flex flex-col space-y-5 rounded-md">
+            <ProductSelectors
+              productSelects={productSelects}
+              handleChange={handleProductSelectsChange}
+            />
+          </div>
+          <div className="bg-background border p-10 flex flex-col space-y-5 rounded-md">
             <ProductPricing
               productPricing={productPricing}
               handleChange={handleProductPricingChange}

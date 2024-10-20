@@ -79,3 +79,17 @@ export interface ordersDashboardInfo {
   averageOrderValue: number;
   totalRevenue: number;
 }
+
+export interface addProductData {
+  title: string;
+  shortDescription: string;
+  fullDescription: string;
+  material: string;
+  images: string[];
+  color: string;
+  sizes: string[];
+  gender: string;
+  category: string;
+  regularPrice: string;
+  discountPrice?: string;
+}
