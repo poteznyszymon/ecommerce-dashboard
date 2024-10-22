@@ -76,7 +76,7 @@ export const addProduct = async (req: Request, res: Response) => {
 };
 
 export const getAllProducts = async (req: Request, res: Response) => {
-  const pageSize = 1;
+  const pageSize = 6;
   try {
     let page = parseInt(req.query.page as string) || 1;
 

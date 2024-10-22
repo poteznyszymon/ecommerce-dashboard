@@ -1,5 +1,6 @@
 import Header from "@/components/products/Header";
 import ProductsTable from "@/components/products/ProductsTable";
+import Pagination from "@/components/shared/Pagination";
 import ProductsTableSkeleton from "@/components/skeletons/ProductsTableSkeleton";
 import { Button } from "@/components/ui/button";
 
@@ -28,7 +29,7 @@ const ProductsPage = () => {
     );
 
   return (
-    <div className="min-h-screen p-5 w-full flex flex-col gap-3 z-10">
+    <div className="p-5 w-full flex flex-col gap-3 z-10">
       <div className="flex justify-between items-center">
         <Header data={data} />
         <p className="text-sm flex items-center gap-1">
@@ -36,9 +37,12 @@ const ProductsPage = () => {
           <ChevronDown className="size-4" />
         </p>
       </div>
-      <div className="p-5 bg-background border rounded-sm shadow-sm">
-        <ProductsTable data={data} />
+      <div className="min-h-[33rem]">
+        <div className="p-5 bg-background border rounded-sm shadow-sm">
+          <ProductsTable data={data} />
+        </div>
       </div>
+      <Pagination totalPages={data.totalPages} currentPage={Number(page)} />
     </div>
   );
 };
