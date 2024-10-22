@@ -23,4 +23,8 @@ export const colors = [
     title: "Yellow",
     value: "yellow",
   },
+  {
+    title: "White",
+    value: "white",
+  },
 ];

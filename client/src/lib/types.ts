@@ -93,3 +93,13 @@ export interface addProductData {
   regularPrice: string;
   discountPrice?: string;
 }
+
+export interface getProductData {
+  ok: boolean;
+  currentPage: number;
+  totalPages: number;
+  totalProducts: number;
+  pageSize: number;
+  hasNextPage: boolean;
+  products: Product[];
+}

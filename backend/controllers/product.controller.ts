@@ -76,15 +76,20 @@ export const addProduct = async (req: Request, res: Response) => {
 };
 
 export const getAllProducts = async (req: Request, res: Response) => {
-  const pageSize = 6;
+  const pageSize = 1;
   try {
-    const page = parseInt(req.query.page as string) || 1;
+    let page = parseInt(req.query.page as string) || 1;
 
     const totalProducts = await prisma.product.count();
     const totalPages = Math.ceil(totalProducts / pageSize);
     const hasNextPage = page < totalPages;
 
+    if (page > totalPages) {
+      page = totalPages;
+    }
+
     const allProducts = await prisma.product.findMany({
+      orderBy: { id: "desc" },
       skip: (page - 1) * pageSize,
       take: pageSize,
     });
@@ -92,6 +97,8 @@ export const getAllProducts = async (req: Request, res: Response) => {
       ok: true,
       currentPage: page,
       totalPages: totalPages,
+      totalProducts: totalProducts,
+      pageSize: pageSize,
       hasNextPage: hasNextPage,
       products: allProducts,
     });

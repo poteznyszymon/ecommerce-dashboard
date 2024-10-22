@@ -15,7 +15,7 @@ const ImageGrid = ({ images, onChange }: ImageGridProps) => {
           className="border-dashed border-2 aspect-square rounded-md overflow-hidden flex items-center justify-center hover:border-muted-foreground cursor-pointer"
         >
           {images[idx] ? (
-            <img src={images[idx]} className="w-full h-full" />
+            <img src={images[idx]} className="w-full h-full object-cover" />
           ) : (
             <Image className="sm:size-7 size-5 text-muted-foreground" />
           )}
