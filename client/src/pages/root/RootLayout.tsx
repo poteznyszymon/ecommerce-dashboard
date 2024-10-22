@@ -7,11 +7,13 @@ import { Outlet } from "react-router-dom";
 
 const RootLayout = () => {
   return (
-    <main className="min-h-screen bg-secondary">
+    <main className="min-h-screen w-full flex flex-col bg-secondary">
       <Navbar />
-      <div className="flex min-h-screen">
+      <div className="flex">
         <MenuBar />
-        <Outlet />
+        <div className="flex-grow overflow-x-hidden z-10">
+          <Outlet />
+        </div>
       </div>
       <Toaster />
       <SquareBackground />

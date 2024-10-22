@@ -13,8 +13,11 @@ interface PaginationProps {
 }
 
 const Pagination = ({ totalPages, currentPage }: PaginationProps) => {
+  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage < 1) currentPage = 1;
+
   return (
-    <div className="flex items-center justify-center gap-2">
+    <div className="w-full flex items-center justify-center gap-2">
       <Link to="/products?page=1">
         <Button
           disabled={currentPage === 1}
@@ -33,7 +36,7 @@ const Pagination = ({ totalPages, currentPage }: PaginationProps) => {
           <ChevronLeft strokeWidth={1.3} />
         </Button>
       </Link>
-      <p className="text-sm">
+      <p className="text-sm hidden sm:block">
         Page {currentPage} of {totalPages}
       </p>
       <Link to={`/products?page=${currentPage + 1}`}>

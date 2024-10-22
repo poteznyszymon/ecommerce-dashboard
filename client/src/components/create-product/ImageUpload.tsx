@@ -6,7 +6,7 @@ interface ImageUploadProps {
 
 const ImageUpload = ({ onChange }: ImageUploadProps) => {
   return (
-    <div className="flex-1 border-dashed rounded-md border-2 p-5 hover:border-muted-foreground cursor-pointer">
+    <div className="flex-1 border-dashed rounded-md border-2 p-10 hover:border-muted-foreground cursor-pointer">
       <label
         htmlFor="images-input"
         className="flex items-center justify-center h-full text-muted-foreground py-5 lg:py-0 flex-col gap-3 cursor-pointer"

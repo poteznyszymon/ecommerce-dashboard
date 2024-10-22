@@ -1,18 +1,28 @@
 import Header from "@/components/products/Header";
 import ProductsTable from "@/components/products/ProductsTable";
+import SortedBy from "@/components/products/SortedBy";
 import Pagination from "@/components/shared/Pagination";
 import ProductsTableSkeleton from "@/components/skeletons/ProductsTableSkeleton";
 import { Button } from "@/components/ui/button";
 
 import useGetAllProducts from "@/hooks/products/useGetAllProducts";
-import { ChevronDown } from "lucide-react";
+import { sortedType } from "@/lib/types";
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 const ProductsPage = () => {
+  const [sortedBy, setSortedBy] = useState<sortedType>("latest");
   const [searchParams] = useSearchParams();
   const page = searchParams.get("page") || "1";
 
-  const { data, isLoading } = useGetAllProducts(page);
+  const { data, isLoading, refetch, isRefetching } = useGetAllProducts(
+    page,
+    sortedBy
+  );
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, sortedBy]);
 
   if (isLoading) {
     return <ProductsTableSkeleton />;
@@ -32,12 +42,13 @@ const ProductsPage = () => {
     <div className="p-5 w-full flex flex-col gap-3 z-10">
       <div className="flex justify-between items-center">
         <Header data={data} />
-        <p className="text-sm flex items-center gap-1">
-          Sorted by <span className="font-semibold">latest</span>
-          <ChevronDown className="size-4" />
-        </p>
+        <SortedBy
+          sortedBy={sortedBy}
+          setSortedBy={setSortedBy}
+          isLoading={isRefetching}
+        />
       </div>
-      <div className="min-h-[33rem]">
+      <div className="min-h-[33.6rem]">
         <div className="p-5 bg-background border rounded-sm shadow-sm">
           <ProductsTable data={data} />
         </div>

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import prisma from "../prisma/prisma";
 import { v2 } from "cloudinary";
 import { ProductType } from "../types/product";
+import { Prisma } from "@prisma/client";
 
 export const addProduct = async (req: Request, res: Response) => {
   try {
@@ -79,6 +80,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
   const pageSize = 6;
   try {
     let page = parseInt(req.query.page as string) || 1;
+    const sortedBy = req.query.sortedBy || "latest";
 
     const totalProducts = await prisma.product.count();
     const totalPages = Math.ceil(totalProducts / pageSize);
@@ -87,9 +89,16 @@ export const getAllProducts = async (req: Request, res: Response) => {
     if (page > totalPages) {
       page = totalPages;
     }
+    if (page < 1) {
+      page = 1;
+    }
+
+    const orderBy: Prisma.ProductOrderByWithRelationInput = {
+      id: sortedBy === "oldest" ? "asc" : "desc", // Używamy wartości typu SortOrder
+    };
 
     const allProducts = await prisma.product.findMany({
-      orderBy: { id: "desc" },
+      orderBy,
       skip: (page - 1) * pageSize,
       take: pageSize,
     });

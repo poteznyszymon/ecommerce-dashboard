@@ -103,3 +103,5 @@ export interface getProductData {
   hasNextPage: boolean;
   products: Product[];
 }
+
+export type sortedType = "latest" | "oldest";
