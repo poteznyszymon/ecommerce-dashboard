@@ -104,4 +104,4 @@ export interface getProductData {
   products: Product[];
 }
 
-export type sortedType = "latest" | "oldest";
+export type sortedType = "latest" | "oldest" | "priceAsc" | "priceDesc";

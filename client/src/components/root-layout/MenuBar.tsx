@@ -9,8 +9,8 @@ const MenuBar = () => {
 
   return (
     <div
-      className={`hidden md:flex bg-background border-r z-10 sticky top-[5rem] items-end flex-col transition-all duration-300 h-[calc(100vh-5rem)] p-5 ${
-        collapsedMenu ? "w-24" : "w-60"
+      className={`hidden md:flex bg-background border-r z-10 sticky top-[5rem] items-end flex-col  h-[calc(100vh-5rem)] p-5 ${
+        collapsedMenu ? "min-w-24" : "min-w-52"
       }`}
     >
       <Button
@@ -20,25 +20,19 @@ const MenuBar = () => {
       >
         <ChevronLeft
           strokeWidth={1.7}
-          className={`size-5 transition-transform duration-300 ${
+          className={`size-5 transition-transform duration-300 text-muted-foreground ${
             collapsedMenu ? "rotate-180" : "rotate-0"
           }`}
         />
       </Button>
       {navLinks.map((item) => (
         <Link to={item.link} className="w-full" key={item.name}>
-          <Button className="w-full" variant={"ghost"}>
+          <Button className="w-full text-muted-foreground" variant={"ghost"}>
             <div className="flex items-center w-full gap-5">
               <div className="flex-shrink-0">
                 <item.icon className="size-5" strokeWidth={1.7} />
               </div>
-              <p
-                className={`duration-300 ${
-                  collapsedMenu ? "opacity-0 max-w-0" : "max-w-none opacity-100"
-                }`}
-              >
-                {item.name}
-              </p>
+              <p className={` ${collapsedMenu ? "hidden" : ""}`}>{item.name}</p>
             </div>
           </Button>
         </Link>

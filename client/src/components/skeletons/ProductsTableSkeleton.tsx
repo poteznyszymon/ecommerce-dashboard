@@ -10,10 +10,6 @@ import {
 const ProductsTableSkeleton = () => {
   return (
     <div className="min-h-screen flex flex-col gap-3 p-5 w-full z-10">
-      <div className="flex items-center justify-between">
-        <div className="h-5 w-48 bg-background border rounded-sm animate-pulse" />
-        <div className="h-5 w-32 bg-background border rounded-sm animate-pulse" />
-      </div>
       <div className="bg-background rounded-sm">
         <div className="p-5 bg-background border animate-pulse rounded-sm shadow-sm">
           <Table>

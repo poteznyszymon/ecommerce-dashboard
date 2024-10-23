@@ -142,7 +142,7 @@ const CreateProductPage = () => {
   };
 
   return (
-    <div className=" w-full flex flex-col p-5 z-10 gap-5">
+    <div className="w-full flex flex-col p-5 z-10 gap-5">
       <form className="flex flex-col gap-5" onSubmit={onSubmit}>
         <div className="grid lg:grid-cols-2 xl:grid-cols-3 xl:grid-rows-2 gap-5">
           <div className="border shadow-sm bg-background p-10 flex flex-col gap-5 rounded-md xl:row-span-2">

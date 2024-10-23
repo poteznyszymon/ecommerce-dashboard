@@ -12,8 +12,10 @@ const Header = ({ data }: HeaderProps) => {
       ? (data.currentPage - 1) * data.pageSize + data.products.length
       : data.currentPage * data.pageSize;
   return (
-    <p className="text-sm">
-      Showing {startIndex}-{endIndex} of {data.totalProducts} results.
+    <p className="text-sm hidden md:block bg-secondary px-3 py-1 rounded-full text-muted-foreground">
+      Showing <span className="font-semibold">{startIndex}</span>-
+      <span className="font-semibold">{endIndex}</span> of{" "}
+      <span className="font-semibold">{data.totalProducts}</span> results.
     </p>
   );
 };

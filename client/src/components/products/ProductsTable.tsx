@@ -16,7 +16,7 @@ interface ProductsPageProps {
 
 const ProductsTable = ({ data }: ProductsPageProps) => {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto border-b">
       <Table>
         <TableHeader>
           <TableRow>
