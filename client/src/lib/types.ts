@@ -105,3 +105,10 @@ export interface getProductData {
 }
 
 export type sortedType = "latest" | "oldest" | "priceAsc" | "priceDesc";
+
+export type SectionName =
+  | "Dashboard"
+  | "Products"
+  | "Orders"
+  | "Customers"
+  | "Add product";

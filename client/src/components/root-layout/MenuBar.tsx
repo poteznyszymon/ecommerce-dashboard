@@ -3,9 +3,11 @@ import { Button } from "../ui/button";
 import { ChevronLeft } from "lucide-react";
 import { navLinks } from "@/lib/nav-links";
 import { Link } from "react-router-dom";
+import { useActiveSectionContext } from "@/context/ActiveSectionContext";
 
 const MenuBar = () => {
   const [collapsedMenu, setCollapsedMenu] = useState(true);
+  const { activeSection, setActiveSection } = useActiveSectionContext();
 
   return (
     <div
@@ -26,8 +28,20 @@ const MenuBar = () => {
         />
       </Button>
       {navLinks.map((item) => (
-        <Link to={item.link} className="w-full" key={item.name}>
-          <Button className="w-full text-muted-foreground" variant={"ghost"}>
+        <Link
+          to={item.link}
+          className="w-full"
+          key={item.name}
+          onClick={() => setActiveSection(item.name)}
+        >
+          <Button
+            className={`w-full  ${
+              activeSection === item.name
+                ? "text-foreground"
+                : "text-muted-foreground"
+            }`}
+            variant={activeSection === item.name ? "secondary" : "ghost"}
+          >
             <div className="flex items-center w-full gap-5">
               <div className="flex-shrink-0">
                 <item.icon className="size-5" strokeWidth={1.7} />

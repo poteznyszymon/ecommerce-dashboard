@@ -1,6 +1,22 @@
-import { Home, ShoppingCart, Package, Users, CirclePlus } from "lucide-react";
+import {
+  Home,
+  ShoppingCart,
+  Package,
+  Users,
+  CirclePlus,
+  LucideProps,
+} from "lucide-react";
+import { SectionName } from "./types";
 
-export const navLinks = [
+type NavLink = {
+  name: SectionName;
+  icon: React.ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  >;
+  link: string;
+};
+
+export const navLinks: NavLink[] = [
   {
     name: "Dashboard",
     icon: Home,
