@@ -96,13 +96,13 @@ export const getAllProducts = async (req: Request, res: Response) => {
     let orderBy: Prisma.ProductOrderByWithRelationInput;
 
     if (sortedBy === "priceAsc") {
-      orderBy = { regularPrice: "asc" }; // ascending by price
+      orderBy = { regularPrice: "asc" };
     } else if (sortedBy === "priceDesc") {
-      orderBy = { regularPrice: "desc" }; // descending by price
+      orderBy = { regularPrice: "desc" };
     } else if (sortedBy === "oldest") {
-      orderBy = { id: "asc" }; // ascending by ID (oldest first)
+      orderBy = { id: "asc" };
     } else {
-      orderBy = { id: "desc" }; // descending by ID (latest first)
+      orderBy = { id: "desc" };
     }
 
     const allProducts = await prisma.product.findMany({
